@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="transaction.AccountMapper">
+    
+    
+    <select id="getAccounts" resultType="transaction.Account">
+        select
+            *
+        from ACCOUNT
+        where status = #{status}
+        
+        <!-- optional arguments -->
+        <if test="owner > 0">
+            and owner = #{owner}
+        </if>
+    </select>
+    
+    
+    <insert id="saveAccount" parameterType="transaction.Account">
+        insert into ACCOUNT(id, name, status, owner)
+        values(#{account.id}, #{account.name}, #{account.status}, #{account.owner})
+    </insert>
+</mapper>
