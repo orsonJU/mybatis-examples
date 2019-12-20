@@ -5,7 +5,7 @@
 <mapper namespace="overwrite.AccountMapper">
     
     
-    <select id="getAccounts" resultType="overwrite.Account">
+    <select id="getAccounts" resultType="pojo.Account">
         select
             *
         from ACCOUNT

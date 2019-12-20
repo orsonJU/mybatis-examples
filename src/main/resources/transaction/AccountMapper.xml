@@ -5,7 +5,7 @@
 <mapper namespace="transaction.AccountMapper">
     
     
-    <select id="getAccounts" resultType="transaction.Account">
+    <select id="getAccounts" resultType="pojo.Account">
         select
             *
         from ACCOUNT
@@ -18,8 +18,18 @@
     </select>
     
     
-    <insert id="saveAccount" parameterType="transaction.Account">
+    <insert id="saveAccount" parameterType="pojo.Account">
         insert into ACCOUNT(id, name, status, owner)
         values(#{account.id}, #{account.name}, #{account.status}, #{account.owner})
     </insert>
+    
+    <!-- oracle use listagg -->
+    <select id="listAccountWithOracle" resultType="hashmap">
+        select owner, listagg(name, ',') from account group by owner
+    </select>
+
+    <!-- mysql use group_concat -->
+    <select id="listAccountWithMySQL" resultType="hashmap">
+        select owner, group_concat(name) from account group by owner
+    </select>
 </mapper>

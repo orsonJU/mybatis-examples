@@ -4,10 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     
-    <typeAliases>
-        <typeAlias type="transaction.ThreadSafeJDBCTransactionFactory" alias="THREADSAFE"/>
-    </typeAliases>
-    
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
@@ -19,9 +15,14 @@
             </dataSource>
         </environment>
     </environments>
+
+    <databaseIdProvider type="DB_VENDOR">
+        <property name="Oracle" value="oracle" />
+        <property name="MySQL" value="mysql" />
+    </databaseIdProvider>
     
     <!-- mapper configuration -->
     <mappers>
-        <mapper resource="transaction/AccountMapper.xml"/>
+        <mapper resource="databaseid/AccountMapper.xml"/>
     </mappers>
 </configuration>

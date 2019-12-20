@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="databaseid.AccountMapper">
+    
+    <!-- oracle use listagg -->
+    <select id="listAccount" resultType="hashmap" databaseId="oracle">
+        select owner, listagg(name, ',') as accounts from account group by owner
+    </select>
+
+    <!-- mysql use group_concat -->
+    <select id="listAccount" resultType="hashmap" databaseId="mysql">
+        select owner, group_concat(name) as accounts from account group by owner
+    </select>
+</mapper>

@@ -1,4 +1,4 @@
-package overwrite;
+package pojo;
 
 public class Owner {
 	private int id;
